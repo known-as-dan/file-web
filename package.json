@@ -1,9 +1,9 @@
 {
   "name": "image-cli",
   "version": "1.0.0",
-  "description": "An image hosting application.",
+  "description": "A file hosting application.",
   "main": "dist/index.js",
-  "repository": "https://github.com/known-as-dan/image-cli.git",
+  "repository": "https://github.com/known-as-dan/file-web.git",
   "author": "known-as-dan",
   "license": "MIT",
   "private": false,
