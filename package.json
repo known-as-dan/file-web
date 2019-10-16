@@ -1,5 +1,5 @@
 {
-  "name": "image-cli",
+  "name": "file",
   "version": "1.0.0",
   "description": "A file hosting application.",
   "main": "dist/index.js",
