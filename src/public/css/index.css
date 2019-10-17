@@ -1,0 +1,19 @@
+html {
+	font-family: "Roboto Mono";
+}
+
+header {
+	text-align: center;
+	font-size: 72px;
+	font-weight: bold;
+}
+
+body {
+	width: 500px;
+	margin: auto;
+}
+
+.file {
+	text-decoration: None;
+	color: inherit;
+}
