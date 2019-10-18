@@ -1,12 +1,14 @@
 "use strict";
 
-import { getContent } from "./file";
+import Hapi from "@hapi/hapi";
+import Path from "path";
+import { getContent, isDirectory, isFile } from "./file";
 
-const Hapi = require("@hapi/hapi");
-const Path = require("path");
-
+/**
+ * Initialize HapiJS server
+ */
 const init: Function = async () => {
-	const server = Hapi.server({
+	const server = new Hapi.Server({
 		port: 3002,
 		host: "localhost",
 		routes: {
@@ -20,29 +22,43 @@ const init: Function = async () => {
 
 	server.route({
 		method: "GET",
-		path: "/{param*}",
-		handler: {
-			directory: {
-				path: "public"
+		path: "/{filename*}",
+		handler: (request: any, h: any) => {
+			const storage_path = "files";
+			const doc_path = "public/index.html";
+
+			const request_path = Path.join(storage_path, request.params.filename);
+			const full_request_path = Path.join(__dirname, request_path);
+
+			if (isDirectory(full_request_path)) {
+				return h.file(doc_path);
+			} else if (isFile(full_request_path)) {
+				return h.file(request_path);
 			}
 		}
 	});
 
 	server.route({
 		method: "GET",
-		path: "/{filename}",
+		path: "/public/{filename*}",
 		handler: (request: any, h: any) => {
-			const images_path = "images";
-			return h.file(Path.join(images_path, request.path));
+			const file_path = Path.join("public", request.params.filename);
+			return h.file(file_path);
 		}
 	});
 
 	server.route({
 		method: "GET",
-		path: "/api/list",
+		path: "/api/content/{path*}",
 		handler: (request: any, h: any) => {
-			const content = getContent(Path.join(__dirname, "images"))
-			return content;
+			const storage_path = "files";
+			const requested_path = request.params.path || "";
+			const path = Path.join(__dirname, storage_path, requested_path);
+			console.log(path);
+			if (isDirectory(path)) {
+				const content = getContent(path);
+				return content;
+			}
 		}
 	});
 
@@ -55,4 +71,14 @@ process.on("unhandledRejection", (err) => {
 	process.exit(1);
 });
 
-init();
+/**
+ * @param args Arguments.
+ */
+function main(args: Array<string>): number {
+	init();
+
+	return 0; // 0 == successful execution
+}
+
+// NOTE: This part should ALWAYS be at the end of the file!
+const exit_code: number = main([...process.argv]);

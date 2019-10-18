@@ -8,20 +8,26 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "yarn tsc && cp -r src/public dist",
+    "copy": "yarn copyfiles -u 1 src/public/*.html dist/ && yarn copyfiles -u 1 src/public/css/*.css dist/",
+    "bundle": "yarn browserify dist/public/js/index.js -o dist/public/js/bundle.js",
+    "build": "yarn tsc && yarn bundle && yarn copy",
     "execute": "node dist/index.js",
     "start": "yarn build && yarn execute",
     "test": "nodemon"
   },
   "devDependencies": {
+    "@hapi/hapi": "^18.4.0",
+    "@types/hapi__hapi": "^18.2.5",
+    "@types/inert": "^5.1.2",
+    "@types/jquery": "^3.3.31",
     "@types/node": "^12.7.12",
+    "browserify": "^16.5.0",
+    "copyfiles": "^2.1.1",
+    "nodemon": "^1.19.4",
     "pm2": "^4.1.2",
-    "typescript": "^3.6.4",
-    "nodemon": "^1.19.4"
+    "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@hapi/hapi": "^18.4.0",
-    "@types/jquery": "^3.3.31",
     "inert": "^5.1.3"
   }
 }

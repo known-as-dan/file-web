@@ -4,8 +4,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="js/api.js"></script>
-		<link rel="stylesheet" href="css/index.css">
+		<script src="https://file.gotoindex.com/public/js/bundle.js"></script>
+		<link rel="stylesheet" href="https://file.gotoindex.com/public/css/index.css">
 	</head>
 	<title>
 		file
@@ -14,15 +14,6 @@
 		file
 	</header>
 	<body>
-		<div id="list">
-			<script>
-				$.getJSON("api/list", (data) => {
-					for (let i= 0; i < data.length; i++) {
-						file = data[i];
-						addFile(file);
-					}
-				});
-			</script>
-		</div>
+		<div id="list"></div>
 	</body>
 </html>
