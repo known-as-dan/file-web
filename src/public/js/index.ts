@@ -1,6 +1,11 @@
-import { addFile, joinPaths } from "./api";
+import { addFile, joinPaths, parentDirectory } from "./file";
 
-function main(): void {
+export function main(): void {
+	if (window.location.pathname !== "/") {
+		const parent_directory = parentDirectory(window.location.pathname)
+		addFile("<", parent_directory)
+	}
+
 	const request = joinPaths(["/api/content", window.location.pathname]);
 	$.getJSON(request, (data) => {
 		let file: string;
@@ -11,4 +16,4 @@ function main(): void {
 	});
 }
 
-main();
+$(window).ready(main);

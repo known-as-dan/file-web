@@ -54,9 +54,8 @@ const init: Function = async () => {
 			const storage_path = "files";
 			const requested_path = request.params.path || "";
 			const path = Path.join(__dirname, storage_path, requested_path);
-			console.log(path);
 			if (isDirectory(path)) {
-				const content = getContent(path);
+				let content = getContent(path);
 				return content;
 			}
 		}
@@ -71,14 +70,8 @@ process.on("unhandledRejection", (err) => {
 	process.exit(1);
 });
 
-/**
- * @param args Arguments.
- */
-function main(args: Array<string>): number {
+function main() {
 	init();
-
-	return 0; // 0 == successful execution
 }
 
-// NOTE: This part should ALWAYS be at the end of the file!
-const exit_code: number = main([...process.argv]);
+main();
