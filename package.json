@@ -16,7 +16,7 @@
     "test": "nodemon"
   },
   "devDependencies": {
-    "@hapi/hapi": "^18.4.0",
+    "@hapi/hapi": "^19.1.1",
     "@types/hapi__hapi": "^18.2.5",
     "@types/inert": "^5.1.2",
     "@types/jquery": "^3.3.31",
